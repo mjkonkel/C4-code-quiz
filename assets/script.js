@@ -2,49 +2,104 @@
 var startButton = document.querySelector(".start-button");
 var timerEl = document.querySelector(".timer");
 var timeLeft = 3;
-var questionOneDisplay = document.querySelector(".questionOneDisplay")
 
-var questionOne = {
-    question: "Commonly used data types DO NOT include:",
-    answers: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-    correctAnswer: "3. Alerts", 
-}
-// console.log(questionOne.question)
-// console.log(questionOne.answers)
-// console.log(questionOne.answers[2])
+var questions = [
+    {
+    title: "Commonly used data types DO NOT include:",
+    choices: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
+    answer: "3. Alerts", 
+    },
+    {
+    title: "The condition in and if / else statement is enclosed within ____.",
+    choices: ["1. Quotes", "2. Curly Brackets", "3. Parentheses", "4. Square Brackets"],
+    answer: "3. Parentheses", 
+    },
+    {
+    title: "Arrays in JavaScript can be used to store ____.",
+    choices: ["1. Numbers and Strings", "2. Other Arrays", "3. Booleans", "4. All of the Above"],
+    answer: "3. All of the Above", 
+    },
+    {
+    title: "String values must be enclosed within ____ when being assigned to variables.",
+    choices: ["1. Commas", "2. Curly Brackets", "3. Quotes", "4. Parentheses"],
+    answer: "3. Quotes", 
+    },
+    {
+    title: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: ["1. JavaScript", "2. Terminal / Bash", "3. For Loops", "4. Console Log"],
+    answer: "4. Console Log", 
+    },
+]
 
-
-timerEl.textContent = timeLeft
+// function for the timer
+timerEl.textContent = "Time: " + timeLeft
 function countdown() {
 
     startTimer = setInterval(function () {
         console.log(timeLeft)
         if (timeLeft > 0) {
-        timerEl.textContent = timeLeft;
+        timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
-        } else if (timeLeft === 0) {
+        } 
+        else if (timeLeft === 0) {
             console.log("Time's up!")
             clearInterval(startTimer)
             timerEl.textContent = "Time's up!";
-            console.log(questionOne.correctAnswer)
-        }
+        } 
     }, 1000);
 
 }
 
+// var doneDiv = document.getElementById('doneDiv')
+
+// function stopQuiz() {
+//     if (timeLeft === 0) {
+//     var h3El = document.createElement('h3')
+//     h3El.textContent = "Done"
+
+//     doneDive.append(h3El)
+// }}
+
+
+// function for showing the questions
+var questionDiv = document.getElementById('questionDiv')
+
+var indexNumber = 0
+
+function start() {
+    questionDiv.innerHTML = '';
+    var h3El = document.createElement('h3')
+    h3El.textContent = questions[indexNumber].title
+
+    var buttonDiv = document.createElement('div')
+    buttonDiv.classList.add("buttonDiv")
+
+    for (var i = 0; i < questions[indexNumber].choices.length; i++) {
+
+        var btnEl = document.createElement('button')
+
+        btnEl.textContent = questions[indexNumber].choices[i];
+
+        btnEl.setAttribute('value', questions[indexNumber].choices[i])
+
+        btnEl.addEventListener('click', function () {
+            console.log(this.value)
+            indexNumber++
+            start()
+        })
+        buttonDiv.append(btnEl)
+
+    }
+
+
+    questionDiv.append(h3El, buttonDiv)
+
+    document.querySelector(".intro").classList.add("hidden")
+}
+
+
 startButton.addEventListener("click", function () {
     countdown()
-    console.log("click")
-    console.log(questionOne.question)
-    console.log(questionOne.answers)
+    start()
 }
-)
-
-startButton.addEventListener("click", function() {
-    if (questionOneDisplay.style.display === "none"){
-        questionOneDisplay.style.display = "block";
-    } else{
-        questionOneDisplay.style.display = "none";
-    }
-    }
 )
