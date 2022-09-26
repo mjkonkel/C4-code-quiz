@@ -1,8 +1,9 @@
 
 var startButton = document.querySelector(".start-button");
 var timerEl = document.querySelector(".timer");
-var timeLeft = 3;
+var timeLeft = 50;
 
+// variable containing the questions
 var questions = [
     {
     title: "Commonly used data types DO NOT include:",
@@ -31,35 +32,53 @@ var questions = [
     },
 ]
 
+// function for ending the quiz
+function endQuiz() {
+    questionDiv.innerHTML = '';
+    var h3El = document.createElement('h3')
+    h3El.textContent = 'All done!'
+
+    var pDiv = document.createElement('div')
+    pDiv.textContent = 'Your final score is ' + timeLeft
+
+    
+
+    questionDiv.append(h3El, pDiv)
+}
+
+// say if answer is correct or incorrect
+function checkAnswer() {
+    if (this.value !== questions[indexNumber].answer) {
+        timeLeft -= 10;
+
+    // if (timeLeft < 0) {
+    //     timeLeft = 0
+    //     clearInterval(startTimer)
+    //     endQuiz()
+    // }
+    }
+}
+
 // function for the timer
 timerEl.textContent = "Time: " + timeLeft
 function countdown() {
 
     startTimer = setInterval(function () {
         console.log(timeLeft)
-        if (timeLeft > 0) {
+        if (timeLeft >= 0) {
         timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
         } 
-        else if (timeLeft === 0) {
+        if (timeLeft === 0) {
             console.log("Time's up!")
             clearInterval(startTimer)
             timerEl.textContent = "Time's up!";
+            endQuiz()
         } 
+        
     }, 1000);
 
 }
-
-// var doneDiv = document.getElementById('doneDiv')
-
-// function stopQuiz() {
-//     if (timeLeft === 0) {
-//     var h3El = document.createElement('h3')
-//     h3El.textContent = "Done"
-
-//     doneDive.append(h3El)
-// }}
-
 
 // function for showing the questions
 var questionDiv = document.getElementById('questionDiv')
@@ -86,6 +105,7 @@ function start() {
             console.log(this.value)
             indexNumber++
             start()
+            checkAnswer()
         })
         buttonDiv.append(btnEl)
 
@@ -96,6 +116,11 @@ function start() {
 
     document.querySelector(".intro").classList.add("hidden")
 }
+
+
+
+
+
 
 
 startButton.addEventListener("click", function () {
