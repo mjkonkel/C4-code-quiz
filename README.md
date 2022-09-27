@@ -10,6 +10,8 @@ N/A
 
 ## Usage
 
+[Link to deployed website](https://mjkonkel.github.io/C4-code-quiz/)
+
 >To begin the quiz, simply click the **Start Quiz** button.
 ![start button](./assets/images/start.jpg)
 
