@@ -1,15 +1,8 @@
-/* * {
-    outline: 3px solid limegreen !important;
-    background: rgba(0, 151, 0, 0.1) !important;
-} */
-
-
 .hidden{
     display: none;
 }
 
 button {
-    /* background-color: rgba(137, 43, 226); */
     border-radius: 6px;
     margin: 4px;
 }
@@ -23,7 +16,6 @@ button {
 
 .container {
     display: flex;
-    /* background-color: aqua; */
     justify-content: center;
     height: 400px;  
 }
@@ -32,11 +24,6 @@ button {
     width: 400px;
     height: 400px;
     text-align: center;
-    /* background-color: blue; */
-}
-
-#questionDiv {
-    /* background-color: blanchedalmond; */
 }
 
 .container2 {
