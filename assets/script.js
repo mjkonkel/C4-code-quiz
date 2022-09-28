@@ -1,6 +1,6 @@
 var startButton = document.querySelector(".start-button");
 var timerEl = document.querySelector(".timer");
-var timeLeft = 60;
+var timeLeft = 50;
 
 // variable containing the questions
 var questions = [
@@ -42,6 +42,7 @@ function endQuiz() {
     pDiv.textContent = 'Your final score is ' + timeLeft
 
     questionDiv.append(h3El, pDiv)
+    timerEl.textContent = timeLeft
 }
 
 // say if answer is correct or incorrect
@@ -51,9 +52,8 @@ function checkAnswer() {
 
         if (timeLeft < 0) {
             timeLeft = 0
-            endQuiz()
         }
-    }
+    } 
 }
 
 // function for the timer
@@ -66,9 +66,9 @@ function countdown() {
             timerEl.textContent = "Time: " + timeLeft;
             timeLeft--;
         }
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
+            timeLeft = 0
             console.log("Time's up!")
-            // clearInterval(startTimer)
             timerEl.textContent = "Time's up!";
             endQuiz()
         }
@@ -99,8 +99,13 @@ function start() {
         btnEl.addEventListener('click', function () {
             console.log(this.value)
             indexNumber++
+            if (indexNumber === questions.length) {
+                endQuiz()
+            } else {
             start()
             checkAnswer()
+        }
+            
         })
         buttonDiv.append(btnEl)
     }
